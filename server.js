@@ -53,8 +53,6 @@ app.get('/restaurants/:id', (req, res) => {
         res.status(500).json({message: 'Internal server error'})
     });
 });
-
-
 app.post('/restaurants', (req, res) => {
 
   const requiredFields = ['name', 'borough', 'cuisine'];
