@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mscottcam/dash_capstone#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "chai": "^4.1.0",
     "chai-http": "^3.0.0",
     "express": "^4.15.3",
