@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: Fxs2R9xGCCmAn5WrnX1cRSPpKun+4ucye4GcGPDCYxMt0RDhMb80nuAyYNU0v9QgjFj/xx9sWWC+vjQbAZ1Lv8mgmycd0GEoYk3w4APNjg5IvZ22gT86z3dzBQtZz/uHsgM8+LYfOISqWdS/l+WPDggtGmsmFlRB7it1Nejq4+EqlpyT8QuBsTPykzey1feFaEBdi8WtUGxD2D9XlT9rwuBREFDSxh3iFWGEVlntKDwbWPPdtFGffxnpxksOCmPf3MwoP1MyyizRgy9dedBivqFeWNZ2yBlsi9AMSB9hKPezji0QtkiA6via1dKHXdQbxCFxlXEk0i61vqsRQWuQ+ea44RDkgRtvSVmVbBxKFnILOBFofKdEqFR52PXleSDOLgwu0cQry0MlbicaUqlg+jJaunBh29/BmGwiw/+pmCFtB9ft+lsXNs9+58bMwk/TTNacYFeB7yBUy5GpAoxmynIq0mAysBnmppl3q6WlrX/+d2Bfks1L3m261TOCy4aRdKKy+2vsza1p6h2fl9UHd2rVVXs8sMDPhEqr3LBOY7upDKmJnzxxYY125+gySZAGdlNH8X+mC/h4nF88J2URCnRq2axB943DOhL3F4wpXOkih6L9+uFT2SZEF/Iiju/lan59r84AAfNQmU1td4AoUjtlcbdKGWoEZl96fCM2EOE=
+  app: tranquil-plateau-10397
+  on:
+    repo: mscottcam/dash_capstone
