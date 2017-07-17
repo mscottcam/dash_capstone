@@ -166,12 +166,22 @@ Post: {
 - add gif demos
 
 
-HKMrAPXR2iUnqq2Cxc/uP4B3Y1lYFQTvmN55EwJdRX0Ut8n6C
-dgPm1t89My4JuLbIogWdpba+9k14A9ElG0gOmSsjCiSVu0aBVmA6bofDisamoZ
-ZvphwIynNIC+2d+OazUZnjTU95wafwo99NBrVtLMXDk0PzJ6fBKYi742J1d0PO
-
 
 tranquil-plateau-10397
 https://tranquil-plateau-10397.herokuapp.com/
 
 https://git.heroku.com/tranquil-plateau-10397.git
+
+0. npm init and install dependencies
+0. test locally before remote testing (empty test works)
+1. installing travis/ making yml file
+2. github enabling travis
+3. logged into travis, enable repo on dashboard
+4. terminal, heroku create command
+5. expect app-name and credentials in yml file
+6. heroku, enable gitgub, auto deployment
+7. create mlab db
+8. create user for mlab db
+9. mlab url to heroku settings/reveal config vars
+10. commit change, go to travis for pass, check heroku for confirmed deployment
+11. check app (open app at top right)
