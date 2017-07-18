@@ -3,47 +3,54 @@
 ![Organization](http://www.explainxkcd.com/wiki/images/1/1b/home_organization.png)
 
 ## TLTR
-When it comes to learning a new languages, each student is in this cohort is given a preset curriculum that teaches us how ...
+A student dashboard that students can view and contribute to by adding useful resources such as links posted in slack, or material shared by mentors.
 
-
-
-
+## the Application
+App Live on
+[Heroku](https://tranquil-plateau-10397.herokuapp.com/)
 ## Schedule
 * :smirk: Monday (MVP)
 	- [x] Brainstorm ideas
 	- [x] Choose an app idea
 	- [x] Have a high level description of app purpose
-	- [ ] Have extensive list of user stories/features
-	- [ ] Prioritize list
-	- [ ] Mock up user flows, wireframes
-	- [ ] Get it approved
-	- [ ] Set up a "Hello World" prototype
+	- [x] Have extensive list of user stories/features
+	- [x] Prioritize list
+	- [x] Mock up user flows, wireframes
+	- [x] Get it approved
+	- [x] Set up a "Hello World" prototype
 
-* :confused: Tuesday (Skeleton)
-	- [ ]  Version 1.2 contains
+* :confused: Tuesday (Skeleton & Unit Tests)
+	*  Version 1.2 contains
+	- [ ] working skeleton wk 7
+	- [ ] get (functional + test)
+	- [ ] post (functional + test)
+	- [ ] delete (functional + test)
+	- [ ] put (functional + test)
+	- [ ] Object seeding
+	- [ ] auth create profile
+	- [ ] auth login flow
 
-* :sweat: Wednesday (Muscle & Unit Tests)
-	- [ ]  Version 1.3 contains 	
+* :sweat: Wednesday (Muscle)
+	- [ ] Version 1.3 contains 	
 
 * :weary: Thursday (Demo Prep & App Complete)
-	- [ ]  Version 1.3 contains
+	- [ ] Version 1.3 contains
 
 * :bowtie: Friday (Polish & Demo Day)
-	- [ ]  Version 1.4 contains
+	- [ ] Version 1.4 contains
+	- [ ] Demo Deck
 
-## the Application
 
-App Live on
-[Heroku](https://heroku.com)
-
-Back ups on
-[GitHub](https://github.com/dankato/node-001-fsc)
+## Design
+A central location for students to grab the necessities on the fly when learning to code.
+Mentor share something you think the rest of the class will find helpful, instruction send out a url in slack but can't find it, or you are researching on your own and found an interesting article, video or reading material that could help other out, you now can share that all in the Dash-App.
+The current thinkful dashboard houses the main topics and links to prerequirement reading material but what about those daily questions like, what was my pair's github handle or which week did we learn mongoose on? You can now find those answers in the Dash-App. Try it out.
 
 
 ### the Necessities
 * Simple full stack app
 	* CRUD
-* User authentication
+* Basic user authentication
 * Excellent code structure & quality
 
 
@@ -56,6 +63,8 @@ Back ups on
 * Mobile friendly
 * Security (cors)
 
+## Wireframe / Spec
+https://goo.gl/iUP5ZW
 
 ## Design
 1. A website that allows users to share knowledge
@@ -71,13 +80,13 @@ Back ups on
 ## System
 * **The Back End (Node & Express)**
 	* Mongo DB for server database
-	* mLab to host database
+	* mLab to host the database
 	* Mongoose for object data modeling
 	* Passport for request authentication
 	* bcrypt for encryption
-	* Heroku for app deployment
-	* Travis CI for continuous deloyment & testing
-	* Mocha / Chai for unit testing
+	* Heroku for hosting our app
+	* Travis CI for continuous deployment & running unit tests
+	* Mocha / Chai for creating unit testing
 
 * **The Front End**
 	* HTML/CSS
@@ -87,7 +96,6 @@ Back ups on
 	* Postman for testing RESTful endpoints
 
 ## User Stories
-
 ### As a user i can:
 * Create an account (username, password, first name, last name)
 * Log into my own account (username, password)
@@ -120,7 +128,8 @@ Back ups on
 * PUT: /post/:postId
 * DELETE: /post/:postId
 
-## Database
+### Object Model
+```
 User: {
 	firstName: ,
 	lastName: ,
@@ -128,7 +137,8 @@ User: {
 	password: ,
 	slack: string,
 	email: ,
-	githubHandle:
+	github:,
+	dateCreated:
 }
 Post: {
 	header:
@@ -141,47 +151,39 @@ Post: {
 		four_star: 0,
 		five_star: 0
 	},
-	created: ,
+	dateCreated: ,
 	week: ,
-	archive: boolean
+	archive: boolean,
 }
+```
 
-## Structure
-
-
-## Stack
-
-
+## Back ups on
+[GitHub](https://github.com/mscottcam/dash_capstone)
 
 ## Installation
-
 - Download/Clone the repo
 - Install dependencies: `npm install`
 - Start server: `node server.js` or `nodemon server.js`
 - View in browser: `http://localhost:8080`
 - or Heroku link
 
+## History
 
-## markdown
-- add gif demos
-
-
-
-tranquil-plateau-10397
-https://tranquil-plateau-10397.herokuapp.com/
-
-https://git.heroku.com/tranquil-plateau-10397.git
-
+### Day 1 Set Up
 0. npm init and install dependencies
-0. test locally before remote testing (empty test works)
-1. installing travis/ making yml file
-2. github enabling travis
-3. logged into travis, enable repo on dashboard
-4. terminal, heroku create command
-5. expect app-name and credentials in yml file
-6. heroku, enable gitgub, auto deployment
-7. create mlab db
-8. create user for mlab db
-9. mlab url to heroku settings/reveal config vars
-10. commit change, go to travis for pass, check heroku for confirmed deployment
-11. check app (open app at top right)
+1. test locally before remote testing (empty test works)
+2. installing travis/ making yml file
+3. github enabling travis
+4. logged into travis, enable repo on dashboard
+5. terminal, heroku create command
+6. expect app-name and credentials in yml file
+7. heroku, enable gitgub, auto deployment
+8. create mlab db
+9. create user for mlab db
+10. mlab url to heroku settings/reveal config vars
+11. commit change, go to travis for pass, check heroku for confirmed deployment
+12. check app (open app at top right)
+
+
+### Day 2 App Creation
+1. 
