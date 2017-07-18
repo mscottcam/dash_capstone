@@ -49,6 +49,6 @@ userSchema.methods.apiRepr = function() {
 
 // note that all instance methods and virtual properties on our
 // schema must be defined *before* we make the call to `.model`.
-const Posts = mongoose.model('Posts', postSchema);
+const Post = mongoose.model('Post', postSchema);
 const User = mongoose.model('User', userSchema);
-module.exports = {Posts, User};
+module.exports = {Post, User};

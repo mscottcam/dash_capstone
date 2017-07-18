@@ -5,7 +5,7 @@ const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 const faker = require('faker');
 const should = chai.should();
-const {User, Posts} = require('../models');
+const {User, Post} = require('../models');
 const {closeServer, runServer, app} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
 
@@ -41,7 +41,7 @@ function seedPostsData() {
     });
   }
   // this will return a promise
-  return Posts.insertMany(seedData);
+  return Post.insertMany(seedData);
 }
 
 // Node REPL
@@ -113,13 +113,13 @@ describe('Posts API resource', function() {
           res = _res;
           res.should.have.status(200);
           // otherwise our db seeding didn't work
-          res.body.should.have.length.of.at.least(1);
-          return Posts.count();
+          res.body.should.have.lengthOf.at.least(1);
+          return Post.count();
         })
         .then(count => {
           // the number of returned posts should be same
           // as number of posts in DB
-          res.body.should.have.length.of(count);
+          res.body.should.have.lengthOf(count);
         });
     });
 
@@ -133,8 +133,8 @@ describe('Posts API resource', function() {
 
           res.should.have.status(200);
           res.should.be.json;
-          res.body.should.be.a('array');
-          res.body.should.have.length.of.at.least(1);
+          // res.body.should.be.a('array'); Do we need this?
+          res.body.should.have.lengthOf.at.least(1);
 
           res.body.forEach(function(post) {
             post.should.be.a('object');
@@ -143,7 +143,7 @@ describe('Posts API resource', function() {
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
           resPost = res.body[0];
-          return Posts.findById(resPost.id).exec();
+          return Post.findById(resPost.id).exec();
         })
         .then(post => {
           resPost.header.should.equal(post.header);
@@ -158,13 +158,13 @@ describe('Posts API resource', function() {
     // then prove that the post we get back has
     // right keys, and that `id` is there (which means
     // the data was inserted into db)
-    // Add randomizer function that produces an index of either 0 or 1 
+    // Add randomizer function that produces an index of either 0 or 1
   // Replace myUser[0] with myUser[index].
     it('should add a new post, line 156', function() {
       const newPost = {
         header: faker.company.catchPhrase(),
         url: faker.internet.domainName(),
-        description: faker.lorem.text(),
+        description: faker.lorem.text()
       };
       return chai.request(app)
         .post('/posts')
@@ -178,10 +178,10 @@ describe('Posts API resource', function() {
             'id', 'header', 'url', 'description');
           // cause Mongo should have created id on insertion
           res.body.id.should.not.be.null;
-          res.body.header.should.equal(myUser.header);
+          res.body.header.should.equal(newPost.header);
           res.body.url.should.equal(newPost.url);
           res.body.description.should.equal(newPost.description);
-          return Posts.findById(res.body.id).exec();
+          return Post.findById(res.body.id).exec();
         })
         .then(function(post) {
           post.header.should.equal(newPost.header);
@@ -192,10 +192,9 @@ describe('Posts API resource', function() {
 
     it('should add new user line 200~', function() {
       const myTestPost = {
-        username: faker.internet.userName(),
-        password: '$2a$10$5ETobTF06.8GrpCzd57ZaeIgISBIGqWNR.gOgaszido7Uody7jlra',
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName()
+        header: faker.company.catchPhrase(),
+        url: faker.internet.domainName(),
+        description: faker.lorem.text()
       };
       return chai.request(app)
         .post('/posts')
@@ -204,7 +203,7 @@ describe('Posts API resource', function() {
           res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.should.include.keys(
-            'header', 'url', 'description');  
+            'header', 'url', 'description');
           res.body.header.should.equal(myTestPost.header);
           res.body.url.should.equal(myTestPost.url);
           res.body.description.should.equal(myTestPost.description);
@@ -226,10 +225,14 @@ describe('Posts API resource', function() {
         description: 'cow cow cow'
       };
 
-      return Posts
+      let post;
+
+      return Post
         .findOne()
-        .exec()
-        .then(post => {
+        // .exec()
+        // let post;
+        .then(_post => {
+          post=_post;
           updateData.id = post.id;
 
           return chai.request(app)
@@ -238,17 +241,10 @@ describe('Posts API resource', function() {
             .send(updateData);
         })
         .then(res => {
-          res.should.have.status(201);
-          res.should.be.json;
-          res.body.should.be.a('object');
-          res.body.header.should.equal(updateData.header);
-          res.body.url.should.equal(updateData.url);
-          res.body.description.should.equal(updateData.description);
-          return Posts.findById(res.body.id).exec();
+          res.should.have.status(204);
+          return Post.findById(post.id).exec();
         })
         .then(post => {
-          post.title.should.equal(updateData.title);
-          post.content.should.equal(updateData.content);
           post.header.should.equal(updateData.header);
           post.url.should.equal(updateData.url);
           post.description.should.equal(updateData.description);
@@ -266,20 +262,20 @@ describe('Posts API resource', function() {
 
       let post;
 
-      return Posts
+      return Post
         .findOne()
         .exec()
         .then(_post => {
           post = _post;
           // console.log('what is my username in Delete? ', myUser.username);
-          // console.log('what is my password in Delete? ', myUser.password_plain);          
+          // console.log('what is my password in Delete? ', myUser.password_plain);
           return chai.request(app)
             .delete(`/posts/${post.id}`);
             // .auth(myUser.username, myUser.password_plain); // enable when auth ready
         })
         .then(res => {
           res.should.have.status(204);
-          return Posts.findById(post.id);
+          return Post.findById(post.id);
         })
         .then(_post => {
           // when a variable's value is null, chaining `should`

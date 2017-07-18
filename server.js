@@ -11,7 +11,7 @@ mongoose.Promise = global.Promise;
 // config.js is where we control constants for entire
 // app like PORT and DATABASE_URL
 const {PORT, DATABASE_URL} = require('./config');
-const {Posts, User} = require('./models');
+const {Post, User} = require('./models');
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.get('/posts', (req, res) => {
 
   // res.json('get it!') // connection test successful
-  Posts
+  Post
     .find()
     // `exec` returns a promise
     .exec()
@@ -29,10 +29,7 @@ app.get('/posts', (req, res) => {
     // call the `.apiRepr` instance method we've created in
     // models.js in order to only expose the data we want the API return.
     .then(posts => {
-      res.json({
-        posts: posts.map(
-          (post) => post.apiRepr())
-      });
+      res.json(posts.map( (post) => post.apiRepr()));
     })
     .catch(
       err => {
@@ -43,7 +40,7 @@ app.get('/posts', (req, res) => {
 
 // can also request by ID
 app.get('/posts/:id', (req, res) => {
-  Posts
+  Post
     // this is a convenience method Mongoose provides for searching
     // by the object _id property
     .findById(req.params.id)
@@ -67,7 +64,7 @@ app.post('/posts', (req, res) => {
     }
   }
 
-  Posts
+  Post
     .create({
       header: req.body.header,
       url: req.body.url,
@@ -103,7 +100,7 @@ app.put('/posts/:id', (req, res) => {
     }
   });
 
-  Posts
+  Post
     // all key/value pairs in toUpdate will be updated -- that's what `$set` does
     .findByIdAndUpdate(req.params.id, {$set: toUpdate})
     .exec()
@@ -112,7 +109,7 @@ app.put('/posts/:id', (req, res) => {
 });
 
 app.delete('/posts/:id', (req, res) => {
-  Posts
+  Post
     .findByIdAndRemove(req.params.id)
     .exec()
     .then(post => res.status(204).end())
