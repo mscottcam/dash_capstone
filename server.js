@@ -16,9 +16,15 @@ const {Post, User} = require('./models');
 const app = express();
 app.use(bodyParser.json());
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+  next();
+})
 
 // GET requests to /posts
-app.get('/posts', (req, res) => {
+app.get('/api/posts', (req, res) => {
 
   // res.json('get it!') // connection test successful
   Post

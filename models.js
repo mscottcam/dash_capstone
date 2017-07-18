@@ -7,20 +7,22 @@ const postSchema = mongoose.Schema({
   header: {type: String, required: true},
   url: {type: String, required: true},
   description: {type: String, required: true},
-  // date_created: dateCreated,
-  // week: String,
-  // archive: Boolean,
+  date_created: 0,
+  week: String,
+  archive: Boolean,
 });
 
+
+
 const userSchema = mongoose.Schema({
-  //   firstName: {type: String, required: true},
-  //   lastName: {type: String, required: true},
-  //   username: {type: String, required: true},
-  //   password: {type: String, required: true},
-  //   slack: {type: String, required: true},
-  //   email: {type: String, required: true},
-  //   github:{type: String, required: true},
-  //   cohort:{type: Number, required: true}
+    firstName: {type: String, required: true},
+    lastName: {type: String, required: true},
+    username: {type: String, required: true},
+    password: {type: String, required: true},
+    slack: {type: String, required: true},
+    email: {type: String, required: true},
+    github:{type: String, required: true},
+    cohort:{type: Number, required: true}
 });
 
 // this is an *instance method* which will be available on all instances
@@ -28,17 +30,19 @@ const userSchema = mongoose.Schema({
 // exposes *some* of the fields we want from the underlying data
 postSchema.methods.apiRepr = function() {
   return {
-    id: this._id,
     header: this.header,
     url: this.url,
-    description: this.description
+    description: this.description,
+    date_created: this.date_created,
+    week: this.week,
+    archive: this.archive
   };
 };
 
 userSchema.methods.apiRepr = function() {
   return {
-    id: this._id,
-    username: this.username,
+    firstName: this.firstName,
+    lastName: this.lastName,
     slack: this.slack,
     email: this.email,
     github: this.github,
