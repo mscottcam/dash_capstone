@@ -45,7 +45,7 @@ app.get('/api/posts', (req, res) => {
 });
 
 // can also request by ID
-app.get('/posts/:id', (req, res) => {
+app.get('/api/posts/:id', (req, res) => {
   Post
     // this is a convenience method Mongoose provides for searching
     // by the object _id property
@@ -58,7 +58,7 @@ app.get('/posts/:id', (req, res) => {
     });
 });
 
-app.post('/posts', (req, res) => {
+app.post('/api/posts', (req, res) => {
 
   const requiredFields = ['header', 'url', 'description'];
   for (let i=0; i<requiredFields.length; i++) {
@@ -84,7 +84,7 @@ app.post('/posts', (req, res) => {
 });
 
 
-app.put('/posts/:id', (req, res) => {
+app.put('/api/posts/:id', (req, res) => {
   // ensure that the id in the request path and the one in request body match
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
@@ -114,7 +114,7 @@ app.put('/posts/:id', (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-app.delete('/posts/:id', (req, res) => {
+app.delete('/api/posts/:id', (req, res) => {
   Post
     .findByIdAndRemove(req.params.id)
     .exec()
