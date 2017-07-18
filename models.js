@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 // this is our schema to represent our dashboard
-const dashSchema = mongoose.Schema({
+const postSchema = mongoose.Schema({
   header: {type: String, required: true},
   url: {type: String, required: true},
   description: {type: String, required: true},
@@ -11,7 +11,6 @@ const dashSchema = mongoose.Schema({
   // week: String,
   // archive: Boolean,
 });
-
 
 const userSchema = mongoose.Schema({
   //   firstName: {type: String, required: true},
@@ -21,12 +20,13 @@ const userSchema = mongoose.Schema({
   //   slack: {type: String, required: true},
   //   email: {type: String, required: true},
   //   github:{type: String, required: true},
+  //   cohort:{type: Number, required: true}
 });
 
 // this is an *instance method* which will be available on all instances
 // of the model. This method will be used to return an object that only
 // exposes *some* of the fields we want from the underlying data
-dashSchema.methods.apiRepr = function() {
+postSchema.methods.apiRepr = function() {
   return {
     id: this._id,
     header: this.header,
@@ -41,13 +41,14 @@ userSchema.methods.apiRepr = function() {
     username: this.username,
     slack: this.slack,
     email: this.email,
-    github: this.github
+    github: this.github,
+    cohort: this.cohort
   };
 };
 
 
 // note that all instance methods and virtual properties on our
 // schema must be defined *before* we make the call to `.model`.
-const Posts = mongoose.model('Posts', dashSchema);
+const Posts = mongoose.model('Posts', postSchema);
 const User = mongoose.model('User', userSchema);
 module.exports = {Posts, User};
