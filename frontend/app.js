@@ -25,7 +25,7 @@
 let state = {
   users: [],
   posts: []
-}
+};
 
 // state mods //
 
@@ -39,7 +39,7 @@ let createPost = function(state, header, url) {
     archive: false
   });
   renderPost(state, $('.post-class'));
-}
+};
 
 
 // render functions //
@@ -53,13 +53,40 @@ let renderPost = function (state, element){
         <button>Edit</button>
         <button>Delete</button>
       </div>`
-      );
-    })
+    );
+  });
   element.html(itemsHTML);
-  };
+};
 
+
+
+// event listeners
+
+// CREATE
+	// USER clicked on the "CREATE" button
+$('.week-container').on('click', '.create-button' ,function(event){
+  event.preventDefault();
+
+		//const clickedItem = $(this).closest($('li')).attr('id');
+  
+		// console.log("closest item user clicked on is: " + clickedItem); //closest item user clicked on is: toiletpaper
+  const targetId = $(this).closest('div'); //.data('item-index')
+  console.log('closest item user clicked on is: ' + targetId);  
+
+  // checkItem(appState, targetId);
+	// 	// checkItem(appState, clickedItem);
+  // render(appState, $('.shopping-list'));
+
+});
+// EDIT
+// DELETE
+
+
+
+// execute
 $(function(){
   $.getJSON('http://localhost:8080/api/posts', {}, function(data) {
     console.log(data);
-  })
-})
+  });
+  // .fail() need this
+});

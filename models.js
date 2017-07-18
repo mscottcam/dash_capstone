@@ -7,22 +7,20 @@ const postSchema = mongoose.Schema({
   header: {type: String, required: true},
   url: {type: String, required: true},
   description: {type: String, required: true},
-  date_created: 0,
-  week: String,
-  archive: Boolean,
+  // date_created: 0,
+  // week: String,
+  // archive: Boolean,
 });
 
-
-
 const userSchema = mongoose.Schema({
-    firstName: {type: String, required: true},
-    lastName: {type: String, required: true},
-    username: {type: String, required: true},
-    password: {type: String, required: true},
-    slack: {type: String, required: true},
-    email: {type: String, required: true},
-    github:{type: String, required: true},
-    cohort:{type: Number, required: true}
+  // firstName: {type: String, required: true},
+  // lastName: {type: String, required: true},
+  // username: {type: String, required: true},
+  // password: {type: String, required: true},
+  // slack: {type: String, required: true},
+  // email: {type: String, required: true},
+  // github: {type: String, required: true},
+  // cohort: {type: Number, required: true}
 });
 
 // this is an *instance method* which will be available on all instances

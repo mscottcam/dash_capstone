@@ -107,7 +107,7 @@ describe('Posts API resource', function() {
       //       in db.
       let res;
       return chai.request(app)
-        .get('/posts')
+        .get('/api/posts')
         // .auth(myUser.username, myUser.password) // auth here when ready
         .then(_res => {
           res = _res;
@@ -123,12 +123,12 @@ describe('Posts API resource', function() {
         });
     });
 
-    it('should return posts with right fields', function() {
+    it.only('should return posts with right fields', function() {
       // Strategy: Get back all posts, and ensure they have expected keys
 
       let resPost;
       return chai.request(app)
-        .get('/posts')
+        .get('/api/posts')
         .then(function(res) {
 
           res.should.have.status(200);
@@ -138,7 +138,7 @@ describe('Posts API resource', function() {
 
           res.body.forEach(function(post) {
             post.should.be.a('object');
-            post.should.include.keys('id', 'header', 'url', 'description');
+            post.should.include.keys('header', 'url', 'description');
           });
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
@@ -146,6 +146,8 @@ describe('Posts API resource', function() {
           return Post.findById(resPost.id).exec();
         })
         .then(post => {
+          console.log("---0-0-0-0-0--",resPost);
+          console.log("post here", post);
           resPost.header.should.equal(post.header);
           resPost.url.should.equal(post.url);
           resPost.description.should.equal(post.description);
@@ -167,7 +169,7 @@ describe('Posts API resource', function() {
         description: faker.lorem.text()
       };
       return chai.request(app)
-        .post('/posts')
+        .post('/api/posts')
         // .auth(myUser.username, myUser.password_plain) // auth here when ready
         .send(newPost)
         .then(function(res) {
@@ -197,7 +199,7 @@ describe('Posts API resource', function() {
         description: faker.lorem.text()
       };
       return chai.request(app)
-        .post('/posts')
+        .post('/api/posts')
         .send(myTestPost)
         .then(function(res){
           res.should.have.status(201);
@@ -236,7 +238,7 @@ describe('Posts API resource', function() {
           updateData.id = post.id;
 
           return chai.request(app)
-            .put(`/posts/${post.id}`)
+            .put(`/api/posts/${post.id}`)
             // .auth(myUser.username, myUser.password_plain) // enable auth when ready
             .send(updateData);
         })
@@ -270,7 +272,7 @@ describe('Posts API resource', function() {
           // console.log('what is my username in Delete? ', myUser.username);
           // console.log('what is my password in Delete? ', myUser.password_plain);
           return chai.request(app)
-            .delete(`/posts/${post.id}`);
+            .delete(`/api/posts/${post.id}`);
             // .auth(myUser.username, myUser.password_plain); // enable when auth ready
         })
         .then(res => {
