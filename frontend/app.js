@@ -45,19 +45,30 @@ let createPost = function(state, header, url) {
 // render functions //
 
 let renderPost = function (state, element){
-  let itemsHTML = state.posts.map(function(post, i){
-    return (
-      `<div class="post-class">
-        <h5>Post title here | <a href="https://getbootstrap.com/" target="_blank">https://getbootstrap.com/</a></h5>
-        <p>This is where you give a brief description of what this post is here for</p>
+  let postHTML = state.posts.map(function(post, i){
+    return (`
+      <div class="post-class" data-post-index="${i}">
+        <h5>${post.header} | <a href="${post.url}" target="_blank">${post.url}</a></h5>
+        <p>${post.description}</p>
         <button>Edit</button>
         <button>Delete</button>
-      </div>`
-    );
+      </div>
+      `);
   });
-  element.html(itemsHTML);
+  element.html(postHTML);
 };
 
+let renderUser = function (state, element) {
+  let userHTML = state.users.map(function(user, i) {
+    return (`
+      <div class="user" data-user-index="${i}"
+        <span>${user.firtName} ${user.lastName}</span>
+        <i class="fa fa-slack"></i>
+        <i class="fa fa-github"></i>
+        <i class="fa fa-envelope"></i>
+        `)
+  })
+}
 
 
 // event listeners
@@ -68,10 +79,10 @@ $('.week-container').on('click', '.create-button' ,function(event){
   event.preventDefault();
 
 		//const clickedItem = $(this).closest($('li')).attr('id');
-  
+
 		// console.log("closest item user clicked on is: " + clickedItem); //closest item user clicked on is: toiletpaper
   const targetId = $(this).closest('div'); //.data('item-index')
-  console.log('closest item user clicked on is: ' + targetId);  
+  console.log('closest item user clicked on is: ' + targetId);
 
   // checkItem(appState, targetId);
 	// 	// checkItem(appState, clickedItem);

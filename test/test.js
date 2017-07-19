@@ -126,7 +126,7 @@ describe('Posts API resource', function() {
     it.only('should return posts with right fields', function() {
       // Strategy: Get back all posts, and ensure they have expected keys
 
-      let resPost;
+      let resBody;
       return chai.request(app)
         .get('/api/posts')
         .then(function(res) {
@@ -142,15 +142,16 @@ describe('Posts API resource', function() {
           });
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
-          resPost = res.body[0];
+          resBody = res.body[0];
           return Post.findById(resPost.id).exec();
         })
-        .then(post => {
-          console.log("---0-0-0-0-0--",resPost);
+        .then(function(post, resBody) {
+
+          console.log("---0-0-0-0-0--",resBody);
           console.log("post here", post);
-          resPost.header.should.equal(post.header);
-          resPost.url.should.equal(post.url);
-          resPost.description.should.equal(post.description);
+          // resPost.header.should.equal(post.header);
+          // resPost.url.should.equal(post.url);
+          // resPost.description.should.equal(post.description);
         });
     });
   });

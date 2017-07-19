@@ -186,4 +186,6 @@ Post: {
 
 
 ### Day 2 App Creation
-1. 
+1. unit tests running with Chris, .then not working because "post" was undefined and needed to be made global var.
+2. clean up
+3. front end/ back end connection with elias: setup cors, #scroll functionality for html, app.js state creation
