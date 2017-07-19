@@ -123,7 +123,7 @@ describe('Posts API resource', function() {
         });
     });
 
-    it.only('should return posts with right fields', function() {
+    it('should return posts with right fields', function() {
       // Strategy: Get back all posts, and ensure they have expected keys
 
       let resBody;
@@ -143,15 +143,16 @@ describe('Posts API resource', function() {
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
           resBody = res.body[0];
-          return Post.findById(resPost.id).exec();
+          console.log(res.body)
+          return Post.findById(resBody.id).exec();
         })
-        .then(function(post, resBody) {
-
+        .then(function(post) {
           console.log("---0-0-0-0-0--",resBody);
           console.log("post here", post);
-          // resPost.header.should.equal(post.header);
-          // resPost.url.should.equal(post.url);
-          // resPost.description.should.equal(post.description);
+          // (resPost.id)
+          resBody.header.should.equal(post.header);
+          resBody.url.should.equal(post.url);
+          resBody.description.should.equal(post.description);
         });
     });
   });
@@ -179,7 +180,7 @@ describe('Posts API resource', function() {
           res.body.should.be.a('object');
           res.body.should.include.keys(
             'id', 'header', 'url', 'description');
-          // cause Mongo should have created id on insertion
+          // // cause Mongo should have created id on insertion
           res.body.id.should.not.be.null;
           res.body.header.should.equal(newPost.header);
           res.body.url.should.equal(newPost.url);
@@ -187,6 +188,7 @@ describe('Posts API resource', function() {
           return Post.findById(res.body.id).exec();
         })
         .then(function(post) {
+          console.log(post, newPost)
           post.header.should.equal(newPost.header);
           post.url.should.equal(newPost.url);
           post.description.should.equal(newPost.description);
