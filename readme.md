@@ -122,11 +122,18 @@ https://goo.gl/iUP5ZW
 6. Delete Post page (pop up window over page 3 to confirm delete post)
 
 ### Endpoints
-* GET: /post
-* GET: /post/:postId
-* POST: /post
-* PUT: /post/:postId
-* DELETE: /post/:postId
+## Posts
+* GET: /api/posts
+* GET: /api/posts/:pid
+* POST: /api/posts
+* PUT: /api/posts/:pid
+* DELETE: /api/posts/:pid
+
+## Users
+* GET: /api/stu/:uid
+* POST: /api/stu
+* PUT: /api/stu/:uid
+* DELETE: /api/stu/:uid
 
 ### Object Model
 ```

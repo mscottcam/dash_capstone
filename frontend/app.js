@@ -1,27 +1,5 @@
 'use strict';
 
-// let state = {
-//   users: [
-//     {firstName: ,
-//      lastName: ,
-//      slack: ,
-//      email: ,
-//      github: ,
-//      cohort:
-//     }
-//   ],
-//   posts: [
-//     {
-//       header: ,
-//       url: ,
-//       description: ,
-//       date_created: ,
-//       week: ,
-//       archive:
-//     }
-//   ]
-// };
-
 let state = {
   users: [],
   posts: []
@@ -29,36 +7,20 @@ let state = {
 
 // state mods //
 
-let createPost = function(state, header, url) {
-  state.posts.push({
-    header: header,
-    url: url,
-    description: text,
-    date_created: new Date(),
-    week: 7,
-    archive: false
-  });
-  renderPost(state, $('.post-class'));
-};
+// let createPost = function(state, header, url, description) {
+//   state.posts.push({
+//     header: header,
+//     url: url,
+//     description: description,
+//     date_created: new Date(), // what is the date here?
+//     week: 7, // will need to update this
+//     archive: false // may use this with delete, toggle to archive rather than delete completely
+//   });
+//   renderPost(state, $('.post-class'));
+// };
 
 
-// render functions //
-
-let renderPost = function (state, element){
-  let postHTML = state.posts.map(function(post, i){
-    return (`
-      <div class="post-class" data-post-index="${i}">
-        <h5>${post.header} | <a href="${post.url}" target="_blank">${post.url}</a></h5>
-        <p>${post.description}</p>
-        <button>Edit</button>
-        <button>Delete</button>
-      </div>
-      `);
-  });
-  element.html(postHTML);
-};
-
-let renderUser = function (state, element) {
+let renderUser = function (state, user) {
   let userHTML = state.users.map(function(user, i) {
     return (`
       <div class="user" data-user-index="${i}"
@@ -66,38 +28,115 @@ let renderUser = function (state, element) {
         <i class="fa fa-slack"></i>
         <i class="fa fa-github"></i>
         <i class="fa fa-envelope"></i>
-        `)
-  })
-}
+        `);
+  });
+  user.html(userHTML);
+};
 
 
-// event listeners
+// execute when page loads
 
-// CREATE
-	// USER clicked on the "CREATE" button
-$('.week-container').on('click', '.create-button' ,function(event){
+$( function() {
+
+  var dialog, form,
+ 
+    header = $( '#header' ),
+    url = $( '#url' ),
+    description = $( '#description' ),
+    allFields = $( [] ).add( header ).add( url ).add( description ),
+    tips = $( '.validateTips' );
+ 
+  function updateTips( t ) {
+    tips
+        .text( t )
+        .addClass( 'ui-state-highlight' );
+    setTimeout(function() {
+      tips.removeClass( 'ui-state-highlight', 1500 );
+    }, 500 );
+  }
+ 
+  function checkLength( o, n, min, max ) {
+    if ( o.val().length > max || o.val().length < min ) {
+      o.addClass( 'ui-state-error' );
+      updateTips( 'Length of ' + n + ' must be between ' +
+          min + ' and ' + max + '.' );
+      return false;
+    } else {
+      return true;
+    }
+  }
+ 
+  function addNewPost() {
+    var valid = true;
+    allFields.removeClass( 'ui-state-error' );
+ 
+    valid = valid && checkLength( header, 'header', 3, 200 );
+    valid = valid && checkLength( url, 'url', 6, 500 );
+    valid = valid && checkLength( description, 'description', 5, 200 );
+ 
+    if ( valid ) {
+      $( '#posts tbody' ).append( '<tr>' +
+          '<td>' + header.val() + '</td>' +
+          '<td>' + url.val() + '</td>' +
+          '<td>' + description.val() + '</td>' + 
+          '<td>' + '<button class="edit-button">Edit</button>' + '</td>' +
+          '<td>' + '<button class="remove-button">Remove</button>' + '</td>' +
+        '</tr>' );
+      dialog.dialog( 'close' );
+    }
+    return valid;
+  }
+ 
+  dialog = $( '#dialog-form' ).dialog({
+    autoOpen: false,
+    height: 400,
+    width: 350,
+    modal: true,
+    buttons: {
+      'Create a new post': addNewPost,
+      Cancel: function() {
+        dialog.dialog( 'close' );
+        form[ 0 ].reset();
+        allFields.removeClass( 'ui-state-error' );
+      }
+    }
+  });
+ 
+
+  form = dialog.find( 'form' ).on( 'submit', function( event ) {
+    event.preventDefault();
+    addNewPost();
+    const postAdded = ( $('#header').val() ); // need to get this grab working (@help)
+    console.log('user added: ' + postAdded);
+    // need to re-render here so that remove button is functional for testing (@help)
+
+  });
+ 
+  // Open create post pop up dialog
+  $( '#create-post' ).button().on( 'click', function() {
+    dialog.dialog( 'open' );
+  });
+} );
+
+
+
+
+// Create after page loaded
+
+	// The "remove" button, should remove closest post (@help)
+$('.tbody').on('click', '.remove-button' ,function(event){
   event.preventDefault();
 
-		//const clickedItem = $(this).closest($('li')).attr('id');
+  const clickedItem = $(this).closest($('tr')); //.attr('id')
 
-		// console.log("closest item user clicked on is: " + clickedItem); //closest item user clicked on is: toiletpaper
-  const targetId = $(this).closest('div'); //.data('item-index')
-  console.log('closest item user clicked on is: ' + targetId);
+  console.log('closest item user clicked on is: ' + clickedItem);
 
-  // checkItem(appState, targetId);
-	// 	// checkItem(appState, clickedItem);
-  // render(appState, $('.shopping-list'));
-
+  // removeItem(state, clickedItem);
+  // render(state, $('.bodder'));
 });
-// EDIT
-// DELETE
 
 
-
-// execute
-$(function(){
-  $.getJSON('http://localhost:8080/api/posts', {}, function(data) {
-    console.log(data);
-  });
-  // .fail() need this
-});
+  // $.getJSON('http://localhost:8080/api/posts', {}, function(data) {
+  //   console.log(data);
+  // }).fail() 
+  // Don’t forget your error handling! `$.getJSON()` has a `.fail()` method you can chain on the end; inside, you can pass a function to handle whatever comes back in the event of a bad response.

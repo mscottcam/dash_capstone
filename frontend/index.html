@@ -2,12 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello There</title>
+    <title>Student Dashboard</title>
     <link href="./styles.css" type="text/css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
-
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Palanquin+Dark:700" rel="stylesheet">
   </head>
-  <body class="body">
+<body>
+
+  <container class="bodder">
     <header class="header">
       <div class="header-left">Today is: </div>
       <div class="header-center"><h1>Cohort 12</h1></div>
@@ -18,19 +22,22 @@
       <section class="left">
         <div class="week-list">
             <ul>
-              <li><a href="#week-7">Week 7</a></li>
-              <li><a href="#">Week 8</a></li>
-              <li><a href="#">Week 9</a></li>
-              <li><a href="#">Week 10</a></li>
-              <li><a href="#">Week 11</a></li>
-              <li><a href="#">Week 12</a></li>
-              <li><a href="#">Week 13</a></li>
-              <li><a href="#">Week 14</a></li>
-              <li><a href="#">Week 15</a></li>
-              <li><a href="#">Week 16</a></li>
-              <li><a href="#week-17">Week 17</a></li>
-              <li><a href="#">Week 18</a></li>
-              <li><a href="#">Week 19</a></li>
+              <li>
+                <strong>Week</strong>
+              </li>
+              <li><a href="#week-07">07 - Node Capstone</a></li>
+              <li><a href="#week-08">08 - Redux</a></li>
+              <li><a href="#week-09">09 - React</a></li>
+              <li><a href="#week-10">10</a></li>
+              <li><a href="#week-11">11</a></li>
+              <li><a href="#week-12">Week 12</a></li>
+              <!-- <li><a href="#week-13">13</a></li> -->
+              <!-- <li><a href="#week-14">14</a></li>
+              <li><a href="#week-15">15 - Capstone 1</a></li>
+              <li><a href="#week-16">16 - Capstone 2</a></li>
+              <li><a href="#week-17">17 - Capstone 3</a></li>
+              <li><a href="#week-18">18 - Portfilio Week</a></li>
+              <li><a href="#week-19">19 - Career Service</a></li> -->
             </ul>
         </div>
       </section>
@@ -38,11 +45,13 @@
         <div class="user-list">
           <ul>
             <li>
-
+              <strong>Students</strong>
             </li>
-            <li>Jonathan Haines</li>
-            <li>Evan Harris</li>
-            <li>Lewi Gilamichael </li>
+            <li>Slim Harris</li>
+            <li>Quick Demo</li>
+            <li>Moonshine Pyle</li>
+            <li>Karl Jr.</li>
+            <li>Cactus Karly</li>
             <li>...</li>
           </ul>
         </div>
@@ -51,158 +60,76 @@
         <!--news items-->
         <div class="week-container">
           <div class="week-top-row">
-            <h3 id="week-7">Week 7 - Node</h3>
-            <button class="create-button">Create</button>
+            <h3 id="week-07">Week 07 - Node Capstone</h3>
+            <!-- <button class="create-button">Create</button> -->
           </div>
-          <div class="post-class">
+
+          <!-- <div class="post-class">
             <h5>Post title here | <a href="https://getbootstrap.com/" target="_blank">https://getbootstrap.com/</a></h5>
             <p>This is where you give a brief description of what this post is here for</p>
             <button>Edit</button>
             <button>Delete</button>
+          </div> -->
+
+          <div id="posts-contain" class="ui-widget">
+            <!-- <h1>Header:</h1> -->
+            <table id="posts" class="ui-widget ui-widget-content">
+              <thead>
+                <tr class="ui-widget-header ">
+                  <th id="th1">Subject</th>
+                  <th>url</th>
+                  <th>Description</th>
+                  <th>Edit</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody class="tbody">
+                <tr>
+                  <td>Awesome resource on how to read javascript :/ </td>
+                  <td>https://www.w3schools.com/</td>
+                  <td>Chirs posted this on monday during class in slack</td>
+                  <td><button class="edit-button">Edit</button></td>
+                  <td><button class="remove-button">Remove</button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="post">
-            <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-            <p>This is where you give a brief description of what this post is here for</p>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-          <div class="post">
-            <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-            <p>This is where you give a brief description of what this post is here for</p>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-          <div class="post">
-            <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-            <p>This is where you give a brief description of what this post is here for</p>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-          <div class="post">
-            <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-            <p>This is where you give a brief description of what this post is here for</p>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-          <div class="post">
-            <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-            <p>This is where you give a brief description of what this post is here for</p>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-          <div class="post">
-            <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-            <p>This is where you give a brief description of what this post is here for</p>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-          <div class="post">
-            <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-            <p>This is where you give a brief description of what this post is here for</p>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-          <div class="post">
-            <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-            <p>This is where you give a brief description of what this post is here for</p>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-          <div class="post">
-            <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-            <p>This is where you give a brief description of what this post is here for</p>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-          <div class="post">
-            <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-            <p>This is where you give a brief description of what this post is here for</p>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-          <div class="week-container">
-            <div class="week-top-row">
-              <h3 id="week-17">Week 7 - Node</h3>
-              <button>Create</button>
-            </div>
-            <div class="post-class">
-              <h5>Post title here | <a href="https://getbootstrap.com/" target="_blank">https://getbootstrap.com/</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <div class="post">
-              <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <div class="post">
-              <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <div class="post">
-              <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <div class="post">
-              <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <div class="post">
-              <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <div class="post">
-              <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <div class="post">
-              <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <div class="post">
-              <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <div class="post">
-              <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <div class="post">
-              <h5>Post title here | <a href="https://getbootstrap.com/https://getbootstrap.com/">click here</a></h5>
-              <p>This is where you give a brief description of what this post is here for</p>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
+          <button id="create-post">Create a new post</button>
 
         </div>
       </section>
-    </main>
 
+
+      <div id="dialog-form" title="Create a new post">
+        <p class="validateTips">All form fields are required and keep it under 200 characters.</p>
+      
+        <form>
+          <fieldset>
+            <label for="header">Subject Header</label>
+            <input type="text" header="header" id="header" placeholder="Enter a quick note what this is about." class="text ui-widget-content ui-corner-all">
+            <label for="url">url</label>
+            <input type="text" header="url" id="url" placeholder="http://www.pandaexpress.com" class="text ui-widget-content ui-corner-all">
+            <label for="description">Description</label>
+            <input type="description" header="description" id="description" placeholder="Describe in more detail of its importance." class="text ui-widget-content ui-corner-all">
+      
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+          </fieldset>
+        </form>
+      </div>
+
+    </main>
+  </container>
     <footer>
+      <hr>
+      <p>me a footer</p>
     </footer>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       <script src="app.js"></script>
       </body>
 </html>

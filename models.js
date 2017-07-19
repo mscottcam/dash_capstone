@@ -28,6 +28,7 @@ const userSchema = mongoose.Schema({
 // exposes *some* of the fields we want from the underlying data
 postSchema.methods.apiRepr = function() {
   return {
+    id: this.id,
     header: this.header,
     url: this.url,
     description: this.description,
@@ -41,6 +42,7 @@ userSchema.methods.apiRepr = function() {
   return {
     firstName: this.firstName,
     lastName: this.lastName,
+    username: this.username,
     slack: this.slack,
     email: this.email,
     github: this.github,
