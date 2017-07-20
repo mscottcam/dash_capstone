@@ -1,4 +1,4 @@
-1. why when hitting this endpoint /api/posts, it triggers the catch-all non-existent endpoint 
+1. why when hitting this endpoint /api/posts, it triggers the catch-all non-existent endpoint
     line 125 server.js
     These exist:
     * GET: /api/post
@@ -27,4 +27,4 @@
 
 10. persist data in state, html
 
-11. html page on heroku
+11. html page on heroku (done)

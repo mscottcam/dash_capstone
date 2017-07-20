@@ -11,13 +11,28 @@ var state = {
 
 //---state mods-----------------------------------------------
 
+function getPosts() {
+  $.getJSON('/api/posts/', (json) => {
+  console.log(json)
+  state.posts = json
+  createPost(state, header, url, description);
+  renderPosts(state, $('.tbody'));
+  // $('#dialog-form').dialog( 'close' );
+})
+}
+
+
+
+
 // Create Post
 let createPost = function(state, header, url, description) {
-  // console.log('Step 1: ', header);
+  console.log('Step 1: ', description);
+
   const addObj = {header: header, url: url, description: description};
 
-  // console.log('Step 2: ', state.posts.length);
+  // console.log('Step 2: ', state.posts);
   state.posts.push(addObj);
+
 
   // console.log('Step 3: ', state.posts[0]);
   renderPosts(state, $('.tbody'));
@@ -53,7 +68,7 @@ function postTemplate(state, data, i){
         <td><button class="edit-button">Edit</button></td>
         <td><button class="remove-button">Remove</button></td>
       </tr>`;
-}      
+}
 
 //---render----------------------------------------------------
 
@@ -123,28 +138,11 @@ $( '#create-post' ).on( 'click', function() {
 var dialog = function() {
   $( '#dialog-form' ).on( 'submit', function(event) {
     event.preventDefault();
-    let 
-      header = $('#header').val(), 
+    let
+      header = $('#header').val(),
       url = $('#url').val(),
       description = $('#description').val();
-
-    const data = {header, url, description};
-    $.ajax({
-      url: '/api/posts/',
-      dataType: 'json',
-      type: 'put',
-      contentType: 'application/json',
-      data: JSON.stringify(data),
-      success: function(json){
-        console.log(json);
-      },
-    });
-
-
-    createPost(state, header, url, description);
-    renderPosts(state, $('.tbody'));
-    $('#dialog-form').dialog( 'close' );
-    // $('#dialog-form')[0].reset();
+// $('#dialog-form')[0].reset();
   });
 };
 
@@ -157,7 +155,7 @@ $( '.tbody' ).on( 'click', '.edit-button', function() {
   $('#edit-dialog').dialog( 'open' );
   let grabThisGuy = $(event.currentTarget).closest( 'td' );
   // $( '#myInput' ).val(grabThisGuy.find( '.header' ).html());
-  console.log(grabThisGuy); 
+  console.log(grabThisGuy);
   console.log('i clicked');
 
 
@@ -183,7 +181,8 @@ $( '.tbody'  ).on( 'click', '.remove-button' ,function(event){
 
 $(function() {
   console.log( 'ready!' );
-  dialog();
+  // dialog();
+  getPosts();
 });
 
 

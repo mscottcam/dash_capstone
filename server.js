@@ -19,7 +19,8 @@ app.use(bodyParser.json());
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-// allow methods of put - chrisk (@help)
+  res.header('Access-Control-Allow-Methods', 'GET', 'PUT', 'POST', 'DELETE');
+// allow methods of put - chrisk
   next();
 });
 
@@ -40,7 +41,9 @@ app.get('/api/posts', (req, res) => {
     // models.js in order to only expose the data we want the API return.
     .then(posts => {
       res.json(posts.map( (post) => post.apiRepr()));
+      console.log(post)
     })
+
     .catch(
       err => {
         console.error(err);
@@ -61,8 +64,8 @@ app.get('/api/posts/:id', (req, res) => {
     });
 });
 
-app.post('/api/posts', (req, res) => {
-
+app.post('/api/posts/', (req, res) => {
+  console.log('hello world')
   const requiredFields = ['header', 'url', 'description'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
