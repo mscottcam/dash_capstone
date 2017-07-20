@@ -63,6 +63,7 @@ body {  background-color: #FFFFFF; }
   display: flex;
   justify-content: center;
   width: 20%;
+  z-index: -1;
 }
 
 .left {
@@ -119,7 +120,11 @@ li {
   width: 60%;
   padding: 10px;
   left: 20%;
-  z-index: 10;
+  z-index: 0;
+}
+
+.edit-dialog, .dialog-form, form {
+  z-index: 5;
 }
 
 .week-container {
