@@ -61,17 +61,17 @@ let deletePost = function(state, mongoId) {
 
   $.ajax({
     url: '/api/posts/' + mongoId,
-    dataType: 'json',
-    type: 'delete',
-    contentType: 'application/json',
+    // dataType: 'json',
+    // type: 'delete',
+    // contentType: 'application/json',
     data: JSON.stringify(),
     success: function(json){
-      console.log(json);
+      state.posts.splice(mongoId, 1);
+      renderPosts(state, $('.tbody'));
     },
   });
 
-  // state.posts.splice(index, 1);
-  // renderPosts(state, $('.tbody'));
+
 };
 
 // Create new user/profile
