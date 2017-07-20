@@ -23,7 +23,13 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(express.static('public'))
 // GET requests to /posts
+
+app.get('/', (req, res) => {
+  res.sendFile('index.html')
+})
+
 app.get('/api/posts', (req, res) => {
 
   // res.json('get it!') // connection test successful

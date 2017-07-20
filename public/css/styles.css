@@ -66,6 +66,8 @@ body {  background-color: #FFFFFF; }
 }
 
 .left {
+  /*position: absolute;*/
+
 }
 
 .right {
@@ -74,6 +76,14 @@ body {  background-color: #FFFFFF; }
 
 .week-list {
   position: fixed;
+  width: 20%;
+}
+
+.week-list > ul {
+  width: 80%;
+  margin-left: -30px;
+  margin-right: auto;
+
 
 }
 .user-list {
@@ -82,16 +92,33 @@ body {  background-color: #FFFFFF; }
 
 
 li {
-  margin-right: 50px;
+  width: 100%;
+  /*margin-right: auto;
+  margin-left: auto;*/
   list-style: none;
   padding: 10px 10px 10px 10px;
   text-decoration: none;
-  text-align: center;
+  /*text-align: center;*/
+
+}
+
+@media (max-width: 1000px) {
+  .main-container {
+    flex-direction: column;
+  }
+  .user-list, .week-list {
+    position: static;
+    width: 100%;
+  }
+  .right {
+    order: -1;
+  }
 }
 
 .center {
   width: 60%;
   padding: 10px;
+  left: 20%;
 }
 
 .week-container {
