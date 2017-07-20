@@ -22,19 +22,21 @@ App Live on
 * :confused: Tuesday (Skeleton & Unit Tests)
 	*  Version 1.2 contains
 	- [ ] working skeleton wk 7
-	- [ ] get (functional + test)
-	- [ ] post (functional + test)
-	- [ ] delete (functional + test)
-	- [ ] put (functional + test)
-	- [ ] Object seeding
-	- [ ] auth create profile
-	- [ ] auth login flow
+	- [x] get (functional)
+	- [x] post (functional)
+	- [x] delete (functional)
+	- [x] put (functional)
+	- [x] Object seeding
 
 * :sweat: Wednesday (Muscle)
 	- [ ] Version 1.3 contains 	
+	- [ ] Unit Tests for CRUD
+	- [ ] Post Dialog print to HTML
 
 * :weary: Thursday (Demo Prep & App Complete)
 	- [ ] Version 1.3 contains
+	- [ ] auth create profile
+	- [ ] auth login flow
 
 * :bowtie: Friday (Polish & Demo Day)
 	- [ ] Version 1.4 contains
@@ -55,27 +57,13 @@ The current thinkful dashboard houses the main topics and links to prerequiremen
 
 
 ### Nice to have (listed in priority):
-* Like posts created by other users
-* Export bookmarks
 * Have the ability to add multiple links to one post
 * Oauth GitHub
 * Accessibility
 * Mobile friendly
-* Security (cors)
 
 ## Wireframe / Spec
 https://goo.gl/iUP5ZW
-
-## Design
-1. A website that allows users to share knowledge
-	- website links (add, remove, tag, like, screenshot, comment/post)
-	- video links (add, remove, tag, like, screenshot, comment/post)
-	- book links
-	- movie links
-	- recipe links
-2. A website which generates weird names for your future children
-3. Top App Rankings (Free, Paid, Rated, Rev, DAU)
-
 
 ## System
 * **The Back End (Node & Express)**
@@ -116,10 +104,10 @@ https://goo.gl/iUP5ZW
 ### Views
 1. Create an Account (or login) page
 2. Login page (redirect users to this page after signing up on page 1 or clicking on log in on page 1)
-3. Feed page (Main page where user can CRUD)
-4. Create Post page (pop up window over page 3 to create post)
-5. Edit Post page (pop up window over page 3 to edit post)
-6. Delete Post page (pop up window over page 3 to confirm delete post)
+3. Dashboard page (Main page where user can CRUD)
+4. Create Post pop up dialog over page 3
+5. Edit Post pop up dialog over page 3
+6. Delete Post confirmation pop up dialog over page 3
 
 ### Endpoints
 ## Posts
@@ -135,35 +123,6 @@ https://goo.gl/iUP5ZW
 * PUT: /api/stu/:uid
 * DELETE: /api/stu/:uid
 
-### Object Model
-```
-User: {
-	firstName: ,
-	lastName: ,
-	username: ,
-	password: ,
-	slack: string,
-	email: ,
-	github:,
-	dateCreated:
-}
-Post: {
-	header:
-	url: ,
-	description:,
-	rating: {
-		one_star: 0,
-		two_star: 0,
-		three_star: 0,
-		four_star: 0,
-		five_star: 0
-	},
-	dateCreated: ,
-	week: ,
-	archive: boolean,
-}
-```
-
 ## Back ups on
 [GitHub](https://github.com/mscottcam/dash_capstone)
 
@@ -172,27 +131,5 @@ Post: {
 - Install dependencies: `npm install`
 - Start server: `node server.js` or `nodemon server.js`
 - View in browser: `http://localhost:8080`
-- or Heroku link
+- or use Heroku
 
-## History
-
-### Day 1 Set Up
-0. npm init and install dependencies
-1. test locally before remote testing (empty test works)
-2. installing travis/ making yml file
-3. github enabling travis
-4. logged into travis, enable repo on dashboard
-5. terminal, heroku create command
-6. expect app-name and credentials in yml file
-7. heroku, enable gitgub, auto deployment
-8. create mlab db
-9. create user for mlab db
-10. mlab url to heroku settings/reveal config vars
-11. commit change, go to travis for pass, check heroku for confirmed deployment
-12. check app (open app at top right)
-
-
-### Day 2 App Creation
-1. unit tests running with Chris, .then not working because "post" was undefined and needed to be made global var.
-2. clean up
-3. front end/ back end connection with elias: setup cors, #scroll functionality for html, app.js state creation

@@ -20,3 +20,9 @@
 6. search for (@help) in app.js
 
 7. auth setup, nodemon auth.js, push
+
+8. Delete functional
+
+8. edit functional
+
+9. fetch
