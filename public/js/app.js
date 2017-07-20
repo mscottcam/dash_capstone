@@ -6,37 +6,48 @@
 var state = {
   users: [],
   posts: [],
-  dialogOpen: false,
+  // dialogOpen: false,
 };
 
 //---state mods-----------------------------------------------
 
 function getPosts() {
+  let
+    header = $('#header').val(),
+    url = $('#url').val(),
+    description = $('#description').val();
+
   $.getJSON('/api/posts/', (json) => {
-  console.log(json)
-  state.posts = json
-  createPost(state, header, url, description);
-  renderPosts(state, $('.tbody'));
+    // console.log(json);
+    state.posts = json;
+    createPost(state, header, url, description);
+    renderPosts(state, $('.tbody'));
   // $('#dialog-form').dialog( 'close' );
-})
+  });
 }
 
 
 
 
 // Create Post
-let createPost = function(state, header, url, description) {
-  console.log('Step 1: ', description);
+let createPost = function(state) {
 
+
+  let
+    header = $('#header').val(),
+    url = $('#url').val(),
+    description = $('#description').val();
   const addObj = {header: header, url: url, description: description};
 
   // console.log('Step 2: ', state.posts);
   state.posts.push(addObj);
-
+  // console.log('Step 1: ', description);
 
   // console.log('Step 3: ', state.posts[0]);
   renderPosts(state, $('.tbody'));
 };
+
+
 
 // Edit Post
 let editPost = function(state, header, url, description) {
@@ -46,9 +57,21 @@ let editPost = function(state, header, url, description) {
 
 
 // Delete Post
-let deletePost = function(state, index) {
-  state.posts.splice(index, 1);
-  renderPosts(state, $('.tbody'));
+let deletePost = function(state, mongoId) {
+
+  $.ajax({
+    url: '/api/posts/' + mongoId,
+    dataType: 'json',
+    type: 'delete',
+    contentType: 'application/json',
+    data: JSON.stringify(),
+    success: function(json){
+      console.log(json);
+    },
+  });
+
+  // state.posts.splice(index, 1);
+  // renderPosts(state, $('.tbody'));
 };
 
 // Create new user/profile
@@ -61,7 +84,7 @@ let createUser = function(state, data) {
 
 function postTemplate(state, data, i){
   return `
-      <tr class="table-row" data-post-index="${i}">
+      <tr class="table-row" data-post-id="${data.id}">
         <td>${data.header}</td>
         <td><a href="${data.url}" target="_blank">Link</a></td>
         <td>${data.description}</td>
@@ -89,15 +112,15 @@ function renderUsers(state, element) {
 
 
 // "Create new post" dialog
-$( '#dialog-form' ).dialog({
+$( '#dialog-modal' ).dialog({
   autoOpen: false,
   height: 400,
   width: 350,
   modal: true,
   buttons: {
-    'Create a new post':  dialog,
+    'Submit':  createPost,
     Cancel: function() {
-      $( '#dialog-form' ).dialog( 'close' );
+      $( '#dialog-modal' ).dialog( 'close' );
     //   form[ 0 ].reset();
     //   allFields.removeClass( 'ui-state-error' );
     }
@@ -131,18 +154,14 @@ $( '#edit-dialog' ).dialog({
 
 // Open "create new post" dialog
 $( '#create-post' ).on( 'click', function() {
-  $('#dialog-form').dialog( 'open' );
+  $('#dialog-modal').dialog( 'open' );
 });
 
 //  Create
 var dialog = function() {
   $( '#dialog-form' ).on( 'submit', function(event) {
     event.preventDefault();
-    let
-      header = $('#header').val(),
-      url = $('#url').val(),
-      description = $('#description').val();
-// $('#dialog-form')[0].reset();
+    alert('alert');
   });
 };
 
@@ -171,8 +190,8 @@ $( '.tbody' ).on( 'click', '.edit-button', function() {
 // Delete
 $( '.tbody'  ).on( 'click', '.remove-button' ,function(event){
   event.preventDefault();
-  const postIndex = $(event.currentTarget).closest( 'tr' ).data('data-post-index');
-  deletePost(state, postIndex);
+  const postId = $(event.currentTarget).closest( 'tr' ).data('post-id');
+  deletePost(state, postId);
 });
 // @(help)
 // 1. have not tested this yet, need create to function first
@@ -181,6 +200,10 @@ $( '.tbody'  ).on( 'click', '.remove-button' ,function(event){
 
 $(function() {
   console.log( 'ready!' );
+  $('#dialog-form').on('submit', function (event) {
+    event.preventDefault();
+    createPost(state);
+  } );
   // dialog();
   getPosts();
 });
