@@ -32,21 +32,21 @@ postSchema.methods.apiRepr = function() {
     header: this.header,
     url: this.url,
     description: this.description,
-    date_created: this.date_created,
-    week: this.week,
-    archive: this.archive
+    // date_created: this.date_created,
+    // week: this.week,
+    // archive: this.archive
   };
 };
 
 userSchema.methods.apiRepr = function() {
   return {
-    firstName: this.firstName,
-    lastName: this.lastName,
-    username: this.username,
-    slack: this.slack,
-    email: this.email,
-    github: this.github,
-    cohort: this.cohort
+    // firstName: this.firstName,
+    // lastName: this.lastName,
+    // username: this.username,
+    // slack: this.slack,
+    // email: this.email,
+    // github: this.github,
+    // cohort: this.cohort
   };
 };
 

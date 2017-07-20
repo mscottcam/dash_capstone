@@ -1,4 +1,5 @@
 'use strict';
+/* global $*/
 
 //---state---------------------------------------------------
 
@@ -143,7 +144,7 @@ var dialog = function() {
     createPost(state, header, url, description);
     renderPosts(state, $('.tbody'));
     $('#dialog-form').dialog( 'close' );
-    $('#dialog-form')[0].reset();
+    // $('#dialog-form')[0].reset();
   });
 };
 
@@ -154,9 +155,10 @@ var dialog = function() {
 // Edit
 $( '.tbody' ).on( 'click', '.edit-button', function() {
   $('#edit-dialog').dialog( 'open' );
-  let grabThisGuy = $(this).parents( '.tbody' ).val();
+  let grabThisGuy = $(event.currentTarget).closest( 'td' );
   // $( '#myInput' ).val(grabThisGuy.find( '.header' ).html());
   console.log(grabThisGuy); 
+  console.log('i clicked');
 
 
 
@@ -171,7 +173,7 @@ $( '.tbody' ).on( 'click', '.edit-button', function() {
 // Delete
 $( '.tbody'  ).on( 'click', '.remove-button' ,function(event){
   event.preventDefault();
-  const postIndex = $(event.currentTarget).closest( 'tr' );
+  const postIndex = $(event.currentTarget).closest( 'tr' ).data('data-post-index');
   deletePost(state, postIndex);
 });
 // @(help)

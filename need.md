@@ -15,14 +15,16 @@
 
 4. need submit listener to pull in input data to seed into database, but not working
 
-5. jquery eslint $ fix
+5. jquery eslint $ fix (done)
 
 6. search for (@help) in app.js
 
 7. auth setup, nodemon auth.js, push
 
-8. Delete functional
-
 8. edit functional
 
 9. fetch
+
+10. persist data in state, html
+
+11. html page on heroku
