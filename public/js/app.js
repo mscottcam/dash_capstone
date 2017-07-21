@@ -90,7 +90,7 @@ function postTemplate(state, data, i){
       <tr class="table-row" data-post-id="${data.id}">
         <td id="edit-header">${data.header},${data.id}</td>
         <td id="edit-url"><a href="${data.url}" target="_blank">Link</a></td>
-        <td>${data.week}</td>
+        <td>${data.week} </td> 
         <td id="edit-description">${data.description}</td>
         <td><button class="edit-button">Edit</button></td>
         <td><button class="remove-button">Remove</button></td>
