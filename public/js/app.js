@@ -12,11 +12,6 @@ var state = {
 //---state mods-----------------------------------------------
 
 function getPosts() {
-  let
-    header = $('#header').val(),
-    url = $('#url').val(),
-    week = $('#week').val(),
-    description = $('#description').val();
 
   $.getJSON('/api/posts/', (json) => {
     // console.log(json);
@@ -61,7 +56,31 @@ let createPost = function(state) {
 
 // Edit Post
 
+let editPost = function(state, id) {
 
+
+  let
+    header = $('input#edit-header').val(),
+    url = $('input#edit-url').val(),
+    week = $('input#edit-week').val(),
+    description = $('input#edit-description').val();
+  const addObj = {id: id, header: header, url: url, week: week, description: description};
+
+// console.log(addObj)
+  $.ajax({
+    url: '/api/posts/' + id,
+    dataType: 'json',
+    type: 'put',
+    contentType: 'application/json',
+    data: JSON.stringify(addObj),
+    success: function(data){
+      // console.log('data: ', data);
+      getPosts();
+      $( '#edit-dialog' ).dialog( 'close' );
+    },
+  });
+};
+// PUT => // GET whole list // close dialog => get rerenders list
 
 // Delete Post
 let deletePost = function(state, mongoId) {
@@ -144,7 +163,7 @@ $( '#dialog-modal' ).dialog({
 // 1. Need form reset to function
 
 // "Edit post" dialog
-let grabThisGuy;
+// let grabThisGuy;
 
 $( '#edit-dialog' ).dialog({
   autoOpen: false,
@@ -152,12 +171,11 @@ $( '#edit-dialog' ).dialog({
   width: 350,
   modal: true,
   buttons: {
-    OK: function() {
-      $( '#response' ).html( 'The value entered was ' + $( '#myInput' ).val());
-      console.log(grabthisGuy);
-      grabThisGuy.find( '#edit-header' ).html();
-      $( this ).dialog( 'close' );
-    },
+    // OK: function() {
+    //   $( '#response' ).html( 'The value entered was ' + $( '#myInput' ).val());
+    //   console.log(grabthisGuy);
+    //   grabThisGuy.find( '#edit-header' ).html();
+
     Cancel: function() {
       $( '#response' ).html( 'The Cancel button was clicked' );
       $( this ).dialog( 'close' );
@@ -183,6 +201,9 @@ $( '#create-post' ).on( 'click', function() {
 
 
 let populateEditDialog = function(state, postId) {
+
+  //refactor using the state
+  console.log(state.posts)
   // console.log(state);
   // console.log(postId);// 34567hjkdsf
   // let stateId = state.posts[i].postId
@@ -200,6 +221,7 @@ cellElems.each(function(i, cell){
   if (cell.id==='edit-url') {
     console.log(cell.querySelector('a'))
     inputElems[i].value = cell.querySelector('a').href;
+    //else if the id is for edit-week
   } else {
     inputElems[i].value = cell.innerText;
   }
@@ -223,6 +245,10 @@ $( '.tbody' ).on( 'click', '.edit-button', function() {
   populateEditDialog(state, postId);
   $('#edit-dialog').dialog( 'open' );
 
+  $('#edit-form').on('submit', function (event) {
+    event.preventDefault();
+    editPost(state, postId);
+  } );
 
 
   //let urlInput =
