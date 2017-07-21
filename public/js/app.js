@@ -21,7 +21,7 @@ function getPosts() {
   $.getJSON('/api/posts/', (json) => {
     // console.log(json);
     state.posts = json;
-    createPost(state, header, url, week, description);
+    // createPost(state, header, url, week, description);
     renderPosts(state, $('.tbody'));
   // $('#dialog-form').dialog( 'close' );
   });
@@ -41,19 +41,26 @@ let createPost = function(state) {
     description = $('#description').val();
   const addObj = {header: header, url: url, week: week, description: description};
 
-  // console.log('Step 2: ', state.posts);
-  state.posts.push(addObj);
-  console.log('Step 1: ', description);
-  console.log('Step 1: ', week);
-  $( '#dialog-modal' ).dialog( 'close' );
-  // console.log('Step 3: ', state.posts[0]);
-  renderPosts(state, $('.tbody'));
+
+  $.ajax({
+    url: '/api/posts/',
+    dataType: 'json',
+    type: 'post',
+    contentType: 'application/json',
+    data: JSON.stringify(addObj),
+    success: function(data){
+      console.log('date: ', data);
+      state.posts.push(data);
+      $( '#dialog-modal' ).dialog( 'close' );
+      renderPosts(state, $('.tbody'));
+    },
+  });
 };
 
 
 
 // Edit Post
-let editPost = function(state, header, url, week, description) {
+let editPost = function(state) {
   console.log('code here');
 //   renderPosts(state, $('.tbody'));
 };
@@ -69,11 +76,11 @@ let deletePost = function(state, mongoId) {
     contentType: 'application/json',
     data: JSON.stringify(),
     success: function(json){
-      console.log('delete should delete');
+      getPosts();
+      // renderPosts(state, $('.tbody'));
     },
   });
-  state.posts.splice(mongoId, 1);
-  renderPosts(state, $('.tbody'));
+
 
 };
 
@@ -85,10 +92,11 @@ let createUser = function(state, data) {
 
 //---template----------------------------------------------------
 
-function postTemplate(state, data, i){
+function postTemplate(state, data){
+  // console.log('data.id: ', data.id);
   return `
       <tr class="table-row" data-post-id="${data.id}">
-        <td id="edit-header">${data.header},${data.id}</td>
+        <td id="edit-header">${data.header}</td>
         <td id="edit-url"><a href="${data.url}" target="_blank">Link</a></td>
         <td>${data.week} </td>
         <td id="edit-description">${data.description}</td>
@@ -101,12 +109,16 @@ function postTemplate(state, data, i){
 //---render----------------------------------------------------
 
 function renderPosts(state, element) {
-  let postsHTML = state.posts.map(function(data, i) {
-    return postTemplate(state, data, i);
+  let postsHTML = state.posts.map(function(data) {
+    return postTemplate(state, data);
   });
   element.html(postsHTML);
 }
 
+// render edit dialog to populate fields here
+function renderEdit(state, element) {
+  // code here
+}
 
 // user render goes here (@todo)
 function renderUsers(state, element) {
@@ -164,33 +176,39 @@ $( '#create-post' ).on( 'click', function() {
 });
 
 //  Create
-var dialog = function() {
-  $( '#dialog-form' ).on( 'submit', function(event) {
-    event.preventDefault();
-    alert('alert');
-  });
-};
+// var dialog = function() {
+//   $( '#dialog-form' ).on( 'submit', function(event) {
+//     event.preventDefault();
+//     alert('alert');
+//   });
+// };
+
+
 
 
 
 // Edit
 $( '.tbody' ).on( 'click', '.edit-button', function() {
   $('#edit-dialog').dialog( 'open' );
+  
+  // grab id from state
+  const postId = $(event.currentTarget).closest( 'tr' ).data('post-id');
+  editPost(state, postId); // find actual id
 
-  // 1. how do we get these guys into the edit dialog
-  let header = $('#edit-header').html();
-  $('#edit-url').html()
-  $('#edit-description').html()
+  // click submit
+  // ajax call
+  // success, call getPost
 
+  // 2. Put data in dialog
   $('#edit-header').html(header);
-    // 2. get rid of extra close and submit on the create dialog
-    // 3. same for edit dialog
-    // 4. remove function not functional
-    // 5. data not persisting on app
-    // 6. ascending function for posts
+
+  console.log(header);
 
   // console.log('Step 3: ', state.posts[0]);
-
+  // 1. Grab the data
+  // let header = $('#edit-header').html();
+  // let  url = $('#edit-url').html();
+  // let description =  $('#edit-description').html();
 });
 
 
@@ -209,6 +227,7 @@ $( '.tbody'  ).on( 'click', '.remove-button' ,function(event){
 
 $(function() {
   console.log( 'ready!' );
+  
   $('#dialog-form').on('submit', function (event) {
     event.preventDefault();
     createPost(state);

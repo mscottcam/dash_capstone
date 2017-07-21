@@ -1,28 +1,31 @@
-Must do:
+## Must do:
 1. Functional
     * GET: works
-    * POST: functional on postman, not on app
-    * PUT: pending, edit function is complete
+    * POST: works
+    * PUT: pending, edit function needs to be complete
     * DELETE: works
+    * data.id is undefined on app.js
+
+2. (app.post) add location header in server.js
 
 
-2. (app.post)add location header in server.js- chrisk
+
+
+
 
 3. Edit function: (plug input values into edit pop up dialog)
 4. Edit function: (after edits are made, click submit, new values get push to state and into database)
-
 5. get rid of extra close and submit on the create dialog
 6. same for edit dialog
-
 7. demo deck
 
 
-later:
-x. reset form on dialog close
-8. ascending function for posts
-9. unit test
-10. auth basic
-11. css
+## later:
+8. reset form on dialog close
+9. ascending function for posts
+10. unit test
+11. auth basic
+12. css
 
 9 - chris for 1, 2
 10
