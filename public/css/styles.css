@@ -44,6 +44,10 @@ body {  background-color: #FFFFFF; }
   z-index: 10
 }
 
+#create-post {
+  margin-left: 450px;
+}
+
 .header-left, .header-center, .header-right {
   width: 33.3%;
 }
