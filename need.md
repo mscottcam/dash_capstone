@@ -1,30 +1,38 @@
-1. why when hitting this endpoint /api/posts, it triggers the catch-all non-existent endpoint
-    line 125 server.js
-    These exist:
-    * GET: /api/post
-    * GET: /api/post/:postId
-    * POST: /api/post
-    * PUT: /api/post/:postId
-    * DELETE: /api/post/:postId
+Must do:
+1. Functional
+    * GET: works
+    * POST: functional on postman, not on app
+    * PUT: pending, edit function is complete
+    * DELETE: works
 
-    Possible solution, update config file with this url mongodb://dev:password@ds123371.mlab.com:23371/dash-app
 
-2. how to keep password in above url secret
+2. (app.post)add location header in server.js- chrisk
 
-3. create new post has a extra close button, not sure how to remove
+3. Edit function: (plug input values into edit pop up dialog)
+4. Edit function: (after edits are made, click submit, new values get push to state and into database)
 
-4. need submit listener to pull in input data to seed into database, but not working
+5. get rid of extra close and submit on the create dialog
+6. same for edit dialog
 
-5. jquery eslint $ fix (done)
+7. demo deck
 
-6. search for (@help) in app.js
 
-7. auth setup, nodemon auth.js, push
+later:
+x. reset form on dialog close
+8. ascending function for posts
+9. unit test
+10. auth basic
+11. css
 
-8. edit functional
+9 - chris for 1, 2
+10
+11
+12-30
+1 - elias for must dos and later
+2pm - hard cut off, prep for presentation
+3 - demo deck
+4 - demo
 
-9. fetch
 
-10. persist data in state, html
 
-11. html page on heroku (done)
+https://glitch.com/edit/#!/mongoose-populate-subdocuments?path=README.md:4:44
