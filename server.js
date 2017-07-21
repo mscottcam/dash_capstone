@@ -106,7 +106,7 @@ app.put('/api/posts/:id', (req, res) => {
   // if the user sent over any of the updatableFields, we udpate those values
   // in document
   const toUpdate = {};
-  const updateableFields = ['header', 'url', 'week' 'description'];
+  const updateableFields = ['header', 'url', 'week', 'description'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {
