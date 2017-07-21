@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const postSchema = mongoose.Schema({
   header: {type: String, required: true},
   url: {type: String, required: true},
+  week: {type: Number, required: true},
   description: {type: String, required: true},
   // date_created: 0,
   // week: String,
@@ -31,6 +32,7 @@ postSchema.methods.apiRepr = function() {
     id: this.id,
     header: this.header,
     url: this.url,
+    week: this.week,
     description: this.description,
     // date_created: this.date_created,
     // week: this.week,

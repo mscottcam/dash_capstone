@@ -41,7 +41,7 @@ app.get('/api/posts', (req, res) => {
     // models.js in order to only expose the data we want the API return.
     .then(posts => {
       res.json(posts.map( (post) => post.apiRepr()));
-      console.log(post)
+      // console.log(post)
     })
 
     .catch(
@@ -66,7 +66,7 @@ app.get('/api/posts/:id', (req, res) => {
 
 app.post('/api/posts/', (req, res) => {
   console.log('hello world')
-  const requiredFields = ['header', 'url', 'description'];
+  const requiredFields = ['header', 'url', 'week', 'description'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -80,6 +80,7 @@ app.post('/api/posts/', (req, res) => {
     .create({
       header: req.body.header,
       url: req.body.url,
+      week: req.body.week,
       description: req.body.description})
     .then(
       // add location header - chrisk (@help)
@@ -105,7 +106,7 @@ app.put('/api/posts/:id', (req, res) => {
   // if the user sent over any of the updatableFields, we udpate those values
   // in document
   const toUpdate = {};
-  const updateableFields = ['header', 'url', 'description'];
+  const updateableFields = ['header', 'url', 'week' 'description'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {

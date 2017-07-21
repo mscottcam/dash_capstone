@@ -102,7 +102,7 @@
       <section class="center news">
         <div class="week-container">
           <div class="week-top-row">
-            <h3 id="week-07">Week 07 - Node Capstone</h3>
+            <h3>Dashboard</h3>
           </div>
           <div id="posts-contain" class="ui-widget">
             <table id="posts" class="ui-widget ui-widget-content">
@@ -110,6 +110,7 @@
                 <tr class="ui-widget-header ">
                   <th id="th1">Subject</th>
                   <th>url</th>
+                  <th>Week</th>
                   <th>Description</th>
                   <button id="create-post">Create a new post</button>
                   <th>Edit</th>
@@ -117,13 +118,7 @@
                 </tr>
               </thead>
               <tbody class="tbody">
-                <!-- <tr>
-                  <td class="td-description">Awesome resource on how to read javascript :/ </td>
-                  <td><a href="https://www.w3schools.com/" target="_blank">Link</a></td>
-                  <td>Chirs posted this on monday during class in slack</td>
-                  <td><button id="edit-button" class="edit-button">Edit</button></td>
-                  <td><button id="remove-button" class="remove-button">Remove</button></td>
-                </tr> -->
+
               </tbody>
 
             </table>
@@ -131,6 +126,7 @@
 
 
         </div>
+
       </section>
 
       <!-- Post Dialog -->
@@ -140,11 +136,27 @@
         <form id="dialog-form">
           <fieldset>
             <label for="header">Subject</label>
-            <input type="text" header="header" id="header" placeholder="Enter a quick note what this is about." class="text ui-widget-content ui-corner-all">
+            <input type="text" header="header" id="header" value="Enter a quick note what this is about." class="text ui-widget-content ui-corner-all">
             <label for="url">url</label>
-            <input type="text" header="url" id="url" placeholder="http://www.pandaexpress.com" class="text ui-widget-content ui-corner-all">
+            <input type="text" header="url" id="url" value="http://www.pandaexpress.com" class="text ui-widget-content ui-corner-all">
+            <label  for="week" >Week</label>
+                <select id="week">
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                </select>
             <label for="description">Description</label>
-            <input type="description" header="description" id="description" placeholder="Describe in more detail of its importance." class="text ui-widget-content ui-corner-all">
+            <input type="description" header="description" id="description" value="Describe in more detail of its importance." class="text ui-widget-content ui-corner-all">
 
             <!-- Allow form submission with keyboard without duplicating the dialog button -->
             <input type="submit" tabindex="-1" >
@@ -160,7 +172,7 @@
         <form>
           <fieldset>
             <label for="header">Subject</label>
-            <input type="text" header="header" id="header" value="${data.header}" class="text ui-widget-content ui-corner-all">
+            <input type="text" header="header" id="header" placeholder="${data.header}" class="text ui-widget-content ui-corner-all">
             <label for="url">url</label>
             <input type="text" header="url" id="url" placeholder="${data.url}" class="text ui-widget-content ui-corner-all">
             <label for="description">Description</label>

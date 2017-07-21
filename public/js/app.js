@@ -15,12 +15,13 @@ function getPosts() {
   let
     header = $('#header').val(),
     url = $('#url').val(),
+    week = $('#week').val(),
     description = $('#description').val();
 
   $.getJSON('/api/posts/', (json) => {
     // console.log(json);
     state.posts = json;
-    createPost(state, header, url, description);
+    createPost(state, header, url, week, description);
     renderPosts(state, $('.tbody'));
   // $('#dialog-form').dialog( 'close' );
   });
@@ -36,13 +37,15 @@ let createPost = function(state) {
   let
     header = $('#header').val(),
     url = $('#url').val(),
+    week = $('#week').val(),
     description = $('#description').val();
-  const addObj = {header: header, url: url, description: description};
+  const addObj = {header: header, url: url, week: week, description: description};
 
   // console.log('Step 2: ', state.posts);
   state.posts.push(addObj);
-  // console.log('Step 1: ', description);
-
+  console.log('Step 1: ', description);
+  console.log('Step 1: ', week);
+  $( '#dialog-modal' ).dialog( 'close' );
   // console.log('Step 3: ', state.posts[0]);
   renderPosts(state, $('.tbody'));
 };
@@ -50,7 +53,7 @@ let createPost = function(state) {
 
 
 // Edit Post
-let editPost = function(state, header, url, description) {
+let editPost = function(state, header, url, week, description) {
   console.log('code here');
 //   renderPosts(state, $('.tbody'));
 };
@@ -85,12 +88,14 @@ let createUser = function(state, data) {
 function postTemplate(state, data, i){
   return `
       <tr class="table-row" data-post-id="${data.id}">
-        <td>${data.header}</td>
-        <td><a href="${data.url}" target="_blank">Link</a></td>
-        <td>${data.description}</td>
+        <td id="edit-header">${data.header}</td>
+        <td id="edit-url"><a href="${data.url}" target="_blank">Link</a></td>
+        <td>${data.week}</td>
+        <td id="edit-description">${data.description}</td>
         <td><button class="edit-button">Edit</button></td>
         <td><button class="remove-button">Remove</button></td>
-      </tr>`;
+      </tr>
+      `;
 }
 
 //---render----------------------------------------------------
@@ -140,7 +145,8 @@ $( '#edit-dialog' ).dialog({
   buttons: {
     OK: function() {
       $( '#response' ).html( 'The value entered was ' + $( '#myInput' ).val());
-      grabThisGuy.find( '.header' ).html($( '#myInput' ).val());
+      console.log(grabthisGuy);
+      grabThisGuy.find( '#edit-header' ).html();
       $( this ).dialog( 'close' );
     },
     Cancel: function() {
@@ -172,12 +178,18 @@ var dialog = function() {
 // Edit
 $( '.tbody' ).on( 'click', '.edit-button', function() {
   $('#edit-dialog').dialog( 'open' );
-  let grabThisGuy = $(event.currentTarget).closest( 'td' );
-  // $( '#myInput' ).val(grabThisGuy.find( '.header' ).html());
-  console.log(grabThisGuy);
-  console.log('i clicked');
+
+  // 1. how do we get these guys into the edit dialog
+  $('#edit-header').html()
+  $('#edit-url').html()
+  $('#edit-description').html()
 
 
+    // 2. get rid of extra close and submit on the create dialog
+    // 3. same for edit dialog
+    // 4. remove function not functional
+    // 5. data not persisting on app
+    // 6. ascending function for posts
 
   // console.log('Step 3: ', state.posts[0]);
 
