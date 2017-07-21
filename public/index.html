@@ -169,14 +169,30 @@
       <div id="edit-dialog" title="Edit post">
         <p class="validateTips">All form fields are required and keep it under 200 characters.</p>
 
-        <form>
+        <form id="edit-form">
           <fieldset>
             <label for="header">Subject</label>
-            <input type="text" header="header" id="header" placeholder="${data.header}" class="text ui-widget-content ui-corner-all">
+            <input type="text" name="header" id="edit-header" value="" class="text ui-widget-content ui-corner-all">
             <label for="url">url</label>
-            <input type="text" header="url" id="url" placeholder="${data.url}" class="text ui-widget-content ui-corner-all">
+            <input type="text" name="url" id="edit-url" value="" class="text ui-widget-content ui-corner-all">
+            <label  for="week" >Week</label>
+                <select name="week" id="edit-week">
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                </select>
             <label for="description">Description</label>
-            <input type="description" header="description" id="description" placeholder="${data.description}" class="text ui-widget-content ui-corner-all">
+            <input type="description" name="description" id="edit-description" value="" class="text ui-widget-content ui-corner-all">
 
             <!-- Allow form submission with keyboard without duplicating the dialog button -->
             <!-- <input type="submit" tabindex="-1" > -->

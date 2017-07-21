@@ -60,10 +60,7 @@ let createPost = function(state) {
 
 
 // Edit Post
-let editPost = function(state) {
-  console.log('code here');
-//   renderPosts(state, $('.tbody'));
-};
+
 
 
 // Delete Post
@@ -98,7 +95,7 @@ function postTemplate(state, data){
       <tr class="table-row" data-post-id="${data.id}">
         <td id="edit-header">${data.header}</td>
         <td id="edit-url"><a href="${data.url}" target="_blank">Link</a></td>
-        <td>${data.week} </td>
+        <td id="edit-week">${data.week} </td>
         <td id="edit-description">${data.description}</td>
         <td><button class="edit-button">Edit</button></td>
         <td><button class="remove-button">Remove</button></td>
@@ -185,24 +182,61 @@ $( '#create-post' ).on( 'click', function() {
 
 
 
+let populateEditDialog = function(state, postId) {
+  // console.log(state);
+  // console.log(postId);// 34567hjkdsf
+  // let stateId = state.posts[i].postId
+  // console.log(stateId)
+  const editElemIdentifier = '[id^=edit-]';
 
+const formElem = $('#edit-form');
+const inputElems = formElem.find(editElemIdentifier)
+
+const rowElem = $('tr[data-post-id=' + postId+']');
+const cellElems = rowElem.find(editElemIdentifier)
+// console.log(cells)
+
+cellElems.each(function(i, cell){
+  if (cell.id==='edit-url') {
+    console.log(cell.querySelector('a'))
+    inputElems[i].value = cell.querySelector('a').href;
+  } else {
+    inputElems[i].value = cell.innerText;
+  }
+})
+
+// rowElem.find(tdIdentifier)
+let headerInput = document.getElementById('header-edit');
+  //
+//   renderPosts(state, $('.tbody'));
+};
 
 // Edit
 $( '.tbody' ).on( 'click', '.edit-button', function() {
-  $('#edit-dialog').dialog( 'open' );
-  
-  // grab id from state
-  const postId = $(event.currentTarget).closest( 'tr' ).data('post-id');
-  editPost(state, postId); // find actual id
+  // decide which post we are editing
+  // populate the edit dialog fields
+  // show the dialog
 
+
+
+  const postId = $(event.currentTarget).children( '.table-row' ).data('post-id');
+  populateEditDialog(state, postId);
+  $('#edit-dialog').dialog( 'open' );
+
+
+
+  //let urlInput =
+          //header-edit = input.value;
+  // find actual id (done)
+  // put data in dialog
   // click submit
   // ajax call
   // success, call getPost
 
   // 2. Put data in dialog
-  $('#edit-header').html(header);
+  // $('#edit-header').html(header);
 
-  console.log(header);
+  // console.log(header);
 
   // console.log('Step 3: ', state.posts[0]);
   // 1. Grab the data
@@ -227,7 +261,7 @@ $( '.tbody'  ).on( 'click', '.remove-button' ,function(event){
 
 $(function() {
   console.log( 'ready!' );
-  
+
   $('#dialog-form').on('submit', function (event) {
     event.preventDefault();
     createPost(state);
