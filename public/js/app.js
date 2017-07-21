@@ -88,7 +88,7 @@ let createUser = function(state, data) {
 function postTemplate(state, data, i){
   return `
       <tr class="table-row" data-post-id="${data.id}">
-        <td id="edit-header">${data.header}</td>
+        <td id="edit-header">${data.header},${data.id}</td>
         <td id="edit-url"><a href="${data.url}" target="_blank">Link</a></td>
         <td>${data.week}</td>
         <td id="edit-description">${data.description}</td>
@@ -123,7 +123,7 @@ $( '#dialog-modal' ).dialog({
   width: 350,
   modal: true,
   buttons: {
-    'Submit':  createPost,
+    // 'Submit':  createPost,
     Cancel: function() {
       $( '#dialog-modal' ).dialog( 'close' );
     //   form[ 0 ].reset();
@@ -180,11 +180,11 @@ $( '.tbody' ).on( 'click', '.edit-button', function() {
   $('#edit-dialog').dialog( 'open' );
 
   // 1. how do we get these guys into the edit dialog
-  $('#edit-header').html()
+  let header = $('#edit-header').html();
   $('#edit-url').html()
   $('#edit-description').html()
 
-
+  $('#edit-header').html(header);
     // 2. get rid of extra close and submit on the create dialog
     // 3. same for edit dialog
     // 4. remove function not functional
