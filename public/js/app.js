@@ -61,16 +61,16 @@ let deletePost = function(state, mongoId) {
 
   $.ajax({
     url: '/api/posts/' + mongoId,
-    // dataType: 'json',
-    // type: 'delete',
-    // contentType: 'application/json',
+    dataType: 'json',
+    type: 'delete',
+    contentType: 'application/json',
     data: JSON.stringify(),
     success: function(json){
-      state.posts.splice(mongoId, 1);
-      renderPosts(state, $('.tbody'));
+      console.log('delete should delete');
     },
   });
-
+  state.posts.splice(mongoId, 1);
+  renderPosts(state, $('.tbody'));
 
 };
 
