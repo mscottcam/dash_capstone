@@ -41,6 +41,7 @@ body {  background-color: #FFFFFF; }
   background-color: #2F2F2F;
   border: thin solid black;
   color: white;
+  z-index: 10
 }
 
 .header-left, .header-center, .header-right {
