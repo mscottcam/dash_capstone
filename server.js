@@ -83,7 +83,7 @@ app.post('/api/posts/', (req, res) => {
       week: req.body.week,
       description: req.body.description})
     .then(
-      // add location header - chrisk (@help)
+      // (app.post)add location header in server.js- chrisk (@help)
       post => res.status(201).json(post.apiRepr()))
     .catch(err => {
       console.error(err);
